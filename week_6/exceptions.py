@@ -35,9 +35,9 @@ def retry(func, n):
     for i in range(n):
         try:
             return func()
-        except Exception as e:
+        except Exception:
             if i == n - 1:
-                raise e
+                raise
 
 #7
 def count_errors(funcs):
@@ -52,8 +52,17 @@ def count_errors(funcs):
 def load_config(path):
     with open(path) as f:
         try:
-            int(f.readline())
+            l = f.readline()
+            print(l)
+            int(l)
         except Exception as e:
             raise RuntimeError("failed to load config") from e
 
-load_config("exceptions.py")
+try:
+    try:
+        int("abc")
+    except ValueError:
+        raise RuntimeError("conversion failed") from ValueError("ddddd", "ggggg")
+except RuntimeError as e:
+    print(e.__context__)
+    print()
