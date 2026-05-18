@@ -50,6 +50,16 @@ def merge_sort(t1,t2):
 #9
 def frequency(t):
     return tuple([(i,t.count(i)) for i in set(t)])
+def frequency2(t):
+    d = {}
+    for i in t:
+        if i in d.keys():
+            d[i] += 1
+        else:
+            d.update({i:1})
+    return tuple(d.items())
+print(frequency2(("a", "b", "a", "c", "b", "a") ))
 #10
 def rotate(t, k):
     return t[k % len(t):] + t[:k % len(t)]
+
